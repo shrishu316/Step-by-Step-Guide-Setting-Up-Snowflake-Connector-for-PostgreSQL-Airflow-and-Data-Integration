@@ -2,10 +2,6 @@
 
 
 
-```markdown
-# **Step-by-Step Guide: Setting Up Snowflake Connector for PostgreSQL, Airflow, and Data Integration**
-
----
 
 ## **1. Set Up Apache Airflow**
 
