@@ -32,47 +32,68 @@ docker-compose up -d
 ### 1.3 **Access Airflow UI**:  
 - Go to [http://0.0.0.0:8080/](http://0.0.0.0:8080/).  
 - Log in with the credentials created in step 1.1.
-
-
+![Screenshot from 2025-01-08 17-25-58](https://github.com/user-attachments/assets/1a7c5328-8a9a-40f9-993d-282e683fe5b5)
 
 ### 1.4 **Add API Key**:  
-- Sign up at [WeatherAPI](https://www.weatherapi.com/my/) to get your API key.  
-- Go to **Admin > Variables** in the Airflow UI:  
-  - Add a record with **Key**: `WEATHER_API_KEY` and **Value**: Your API Key.  
+- Sign up at [WeatherAPI](https://www.weatherapi.com/my/) to get your API key.
+![Screenshot from 2025-01-08 17-25-58](https://github.com/user-attachments/assets/1a7c5328-8a9a-40f9-993d-282e683fe5b5)
+
+- Go to **Admin > Variables** in the Airflow UI:
+![Screenshot from 2025-01-08 16-55-10](https://github.com/user-attachments/assets/dfaa6bc2-ab44-42da-9ec0-7d37e0e45896)  
+  - Add a record with **Key**: `WEATHER_API_KEY` and **Value**: Your API Key.
+  ![Screenshot from 2025-01-08 16-57-25](https://github.com/user-attachments/assets/d3704e23-5570-4ebd-a27c-ab9ef379fa0f)
+
+
 
 ### 1.5 **Configure PostgreSQL in Airflow**:  
-- Go to **Admin > Connections** and edit `postgres_default`:  
+- Go to **Admin > Connections** and edit `postgres_default`:
+![Screenshot from 2025-01-08 17-09-43](https://github.com/user-attachments/assets/98136758-854e-4339-bece-4348d633c677)
+
   - Change the database name to `postgres`.
+  ![Screenshot from 2025-01-08 17-12-20](https://github.com/user-attachments/assets/90322751-dd48-4137-b588-a676f000f0f7)
+
 
 ### 1.6 **Add Weather API Connection**:  
-- Add a new record in **Connections**:  
+- Add a new record in **Connections**:
+![Screenshot from 2025-01-08 17-15-03](https://github.com/user-attachments/assets/2331f5b6-391e-4360-b1f5-91e6b5dd676d)
   - **Connection ID**: `weatherapi`  
   - **Connection Type**: HTTP  
   - **Host**: `http://api.weatherapi.com`  
   - **Login**: Your email  
-  - **Password**: Your Weather API password  
+  - **Password**: Your Weather API password
+  ![Screenshot from 2025-01-08 17-17-37](https://github.com/user-attachments/assets/27d55e65-df7f-4a66-99ec-4ad628520ab4)
+  
 
 ---
 
 ## **2. Run and Test Workflows in Airflow**
-1. **Trigger DAGs**:  
-   - Explore the DAGs, logs, and errors in the Airflow UI.  
-   - Trigger the **weather_etl** DAG to load weather data into PostgreSQL.  
+1. **Trigger DAGs**:
+![Screenshot from 2025-01-08 17-25-58](https://github.com/user-attachments/assets/cd4a76d0-2e06-43b3-b5bc-352f8f7515e0)
+   - Explore the DAGs, logs, and errors in the Airflow UI.
+   ![Screenshot from 2025-01-08 17-28-07](https://github.com/user-attachments/assets/d30e865a-564e-498b-b775-aac2e6e82e7c)
+   - Trigger the **weather_etl** DAG to load weather data into PostgreSQL.
+   ![Screenshot from 2025-01-08 17-29-04](https://github.com/user-attachments/assets/3d288b1c-c020-4fe9-8472-6ab312491594)
 
-2. **Monitor Data**:  
-   - Check the `staging_weather_data` table in PostgreSQL.  
+3. **Monitor Data**:  
+   - Check the `staging_weather_data` table in PostgreSQL.
+   ![Screenshot from 2025-01-08 17-38-05](https://github.com/user-attachments/assets/3bfc459d-6479-43b6-9707-04bd34d666c9)
+
    - Trigger the **loading** DAG to transform data into:  
      - `city_dim`  
      - `time_dim`  
      - `weather_condition_dim`  
-     - `weather_fact`  
+     - `weather_fact`
+     ![Screenshot from 2025-01-08 17-37-14](https://github.com/user-attachments/assets/4be2bac8-c30d-4007-bdcb-8e1d1c0c0f28)
+     
 
 ---
 
 ## **3. Set Up PostgreSQL Connection**
 
 ### **Open pgAdmin**:  
-1. **Register a server with the following details**:  
+1. **Register a server with the following details**:
+    ![Screenshot from 2025-01-08 14-37-09](https://github.com/user-attachments/assets/319faa06-8a0d-4efe-b060-fe54ea8a1e52)
+  -Note Postgres container IP address 
     - **Name**: PostgreSQL Server  
     - **Connection Tab**:  
         - **Host**: (Postgres container IP address)  
@@ -80,7 +101,11 @@ docker-compose up -d
         - **Password**: `postgres`  
         - **Database**: `postgres`  
         - **Schema**: `public`  
-        - **Port**: `5432`  
+        - **Port**: `5432`
+        ![Screenshot from 2025-01-08 15-21-03](https://github.com/user-attachments/assets/a9e083dc-2d09-4ac0-be31-e3d19bad1cf8)
+        ![Screenshot from 2025-01-08 14-38-23](https://github.com/user-attachments/assets/db9f59e2-aabb-497e-883e-c643d0151c8a)
+        ![Screenshot from 2025-01-08 14-45-43](https://github.com/user-attachments/assets/e50dc9e2-d159-48b3-abff-7eca41725bad)
+      
 
 ### **Modify PostgreSQL Configuration for Logical Replication**:  
 1. **Check Running Docker Containers**:  
@@ -122,7 +147,10 @@ docker-compose up -d
      ```
 
 7. **Save and Exit**:  
-   - Press `CTRL+O` to save changes, then `CTRL+X` to exit the Nano editor.  
+   - Press `CTRL+O` to save changes, then `CTRL+X` to exit the Nano editor.
+   ![Screenshot from 2025-01-08 21-12-49](https://github.com/user-attachments/assets/c1d29857-f129-424c-9e40-611077ded5bc)
+   ![Screenshot from 2025-01-08 21-01-52](https://github.com/user-attachments/assets/d0e79840-d446-4d8e-a5dc-67cbcc6ae203)
+
 
 ---
 
