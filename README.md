@@ -1,6 +1,6 @@
 # Step-by-Step-Guide-Setting-Up-Snowflake-Connector-for-PostgreSQL-Airflow-and-Data-Integration
 
-Sure! Below is the complete `README.md` file that includes all the points from 1 to 8:
+
 
 ```markdown
 # **Step-by-Step Guide: Setting Up Snowflake Connector for PostgreSQL, Airflow, and Data Integration**
