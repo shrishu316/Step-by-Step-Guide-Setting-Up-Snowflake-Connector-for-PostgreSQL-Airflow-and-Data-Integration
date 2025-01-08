@@ -1,6 +1,14 @@
 # Step-by-Step-Guide-Setting-Up-Snowflake-Connector-for-PostgreSQL-Airflow-and-Data-Integration
 
 
+## Pipeline Architecture Diagram
+![data_pipeline(2)](https://github.com/user-attachments/assets/3cafa950-769c-4d8f-bbdf-d18723eb6813)
+
+## Fact and Dimension Tables
+![fact_dim](https://github.com/user-attachments/assets/45f786cf-e4cb-4d0e-83ab-c6e1398798d6)
+
+
+
 
 
 ## **1. Set Up Apache Airflow**
@@ -32,7 +40,8 @@ docker-compose up -d
 ### 1.3 **Access Airflow UI**:  
 - Go to [http://0.0.0.0:8080/](http://0.0.0.0:8080/).  
 - Log in with the credentials created in step 1.1.
-![Screenshot from 2025-01-08 17-25-58](https://github.com/user-attachments/assets/1a7c5328-8a9a-40f9-993d-282e683fe5b5)
+![Screenshot From 2025-01-08 16-23-05](https://github.com/user-attachments/assets/de8872a1-be67-4586-a4b0-3cc758c59592)
+
 
 ### 1.4 **Add API Key**:  
 - Sign up at [WeatherAPI](https://www.weatherapi.com/my/) to get your API key.
