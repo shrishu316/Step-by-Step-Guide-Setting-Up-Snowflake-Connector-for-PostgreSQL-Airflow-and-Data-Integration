@@ -5,9 +5,7 @@
 ![data_pipeline(2)](https://github.com/user-attachments/assets/3cafa950-769c-4d8f-bbdf-d18723eb6813)
 
 ## Fact and Dimension Tables
-![fact_dim](https://github.com/user-attachments/assets/45f786cf-e4cb-4d0e-83ab-c6e1398798d6)
-
-
+![fact_dim(1)](https://github.com/user-attachments/assets/daa458da-b65e-41f0-9409-7a018d0cc598)
 
 
 
