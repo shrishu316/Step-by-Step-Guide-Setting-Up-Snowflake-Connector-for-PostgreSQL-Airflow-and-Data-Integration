@@ -18,7 +18,9 @@
       --email admin@example.com \
       --password airflow
   ```
-  ![Screenshot from 2025-01-08 15-53-52](https://github.com/user-attachments/assets/2a19582a-2c31-4fdb-96c1-11790a023d86)
+![Screenshot from 2025-01-08 15-52-18](https://github.com/user-attachments/assets/aae25988-1574-44c3-b9a4-536c099042ce)
+
+![Screenshot from 2025-01-08 15-53-52](https://github.com/user-attachments/assets/2a19582a-2c31-4fdb-96c1-11790a023d86)
 
 
 ### 1.2 **Run Airflow in the Terminal**:  
@@ -30,6 +32,8 @@ docker-compose up -d
 ### 1.3 **Access Airflow UI**:  
 - Go to [http://0.0.0.0:8080/](http://0.0.0.0:8080/).  
 - Log in with the credentials created in step 1.1.
+
+
 
 ### 1.4 **Add API Key**:  
 - Sign up at [WeatherAPI](https://www.weatherapi.com/my/) to get your API key.  
