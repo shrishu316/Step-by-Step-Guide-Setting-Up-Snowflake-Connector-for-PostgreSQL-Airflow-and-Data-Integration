@@ -277,6 +277,8 @@ docker-compose up -d
      CALL ADD_DATA_SOURCE('PSQLDS1', 'postgres');
      CALL ADD_TABLES('PSQLDS1', 'public', ['weather_condition_dim', 'weather_fact', 'time_dim', 'city_dim']);
      ```
+     ![Screenshot from 2025-01-07 17-11-07](https://github.com/user-attachments/assets/44f7d65d-4e6b-4844-a49a-9fafda542d27)
+     ![Screenshot from 2025-01-07 17-12-35](https://github.com/user-attachments/assets/1c273922-0f3e-4291-98ef-48846b65ec2e)
 
 4. **Monitor and Manage Replication**:  
    - Enable scheduled replication every 60 minutes:  
