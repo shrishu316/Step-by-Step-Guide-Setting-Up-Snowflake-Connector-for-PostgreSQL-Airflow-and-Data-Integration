@@ -36,7 +36,7 @@ docker-compose up -d
 
 ### 1.4 **Add API Key**:  
 - Sign up at [WeatherAPI](https://www.weatherapi.com/my/) to get your API key.
-![Screenshot from 2025-01-08 17-25-58](https://github.com/user-attachments/assets/1a7c5328-8a9a-40f9-993d-282e683fe5b5)
+![Screenshot from 2025-01-08 17-01-21](https://github.com/user-attachments/assets/ffee9a9a-cdf3-4180-99eb-4d6c15f1988e)
 
 - Go to **Admin > Variables** in the Airflow UI:
 ![Screenshot from 2025-01-08 16-55-10](https://github.com/user-attachments/assets/dfaa6bc2-ab44-42da-9ec0-7d37e0e45896)  
