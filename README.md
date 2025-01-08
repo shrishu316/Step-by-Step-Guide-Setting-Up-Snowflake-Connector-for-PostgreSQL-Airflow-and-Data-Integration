@@ -323,13 +323,19 @@ docker-compose up -d
 
 ### **9.3. Key Generation for PostgreSQL to Snowflake Connection**
 - **Challenge**: When connecting PostgreSQL to Snowflake using the PostgreSQL-agent, the `snowflake.json` file should have been created automatically to extract public and private keys into the `agent-key` folder. However, this process failed, preventing secure communication.
+- **Error**:
+  ![Screenshot from 2025-01-09 01-07-07](https://github.com/user-attachments/assets/94eea1ef-e5cf-4537-b8e6-c0f66314bcad)
+
 - **Solution**: The keys were manually generated using the following commands:
   ```bash
   openssl genrsa -out ./agent-keys/database-connector-agent-app-private-key.p8 2048
   chmod 600 ./agent-keys/database-connector-agent-app-private-key.p8
   openssl rsa -in ./agent-keys/database-connector-agent-app-private-key.p8 -pubout -out ./agent-keys/database-connector-agent-app-public-key.pem
   ```
+  - **Error fixed**:
+    ![Screenshot from 2025-01-09 01-09-39](https://github.com/user-attachments/assets/cc0395a6-a0a9-42af-a1a6-d62f3706bb21)
   Additionally, read-only permissions were configured in the `docker-compose.yaml` file to ensure security.
+![error_handling](https://github.com/user-attachments/assets/8abe0f25-25dd-4d18-b11c-98891c4a97ad)
 
 ### **9.4. Securing Airflow with Fernet Encryption**
 - **Challenge**: Airflow required a secure way to store sensitive information, such as passwords and keys, using encryption.
