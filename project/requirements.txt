@@ -1,0 +1,7 @@
+apache-airflow==2.10.2  # or your specific version
+spotipy
+apache-airflow-providers-amazon
+spotipy
+boto3
+pandas
+

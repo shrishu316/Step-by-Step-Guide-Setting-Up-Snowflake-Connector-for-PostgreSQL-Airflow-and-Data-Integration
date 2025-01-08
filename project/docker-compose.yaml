@@ -1,0 +1,142 @@
+version: "3.8"
+
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.10.2  # Specify the desired Airflow version
+  environment:
+    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:postgres@postgres:5432/postgres
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://postgres:postgres@postgres:5432/postgres
+    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+    AIRFLOW__CORE__FERNET_KEY: 'ijJaL2dcsNcU7rpaSN2vLxvEx_TEC--p9o-G4O4NGZw='
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    _PIP_ADDITIONAL_REQUIREMENTS: "spotipy boto3 pandas"
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./requirements.txt:/requirements.txt  # Optional for custom dependencies
+  user: "${AIRFLOW_UID:-50000}:0"
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:14
+    container_name: airflow-postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5434:5432"  # Mapping host port 5434 to container port 5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+    networks:
+      - app-network
+
+  # Redis (Message broker for Celery)
+  redis:
+    image: redis:7.2-bookworm
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+    restart: always
+    networks:
+      - app-network
+
+  # Airflow Webserver
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: always
+    networks:
+      - app-network
+
+  # Airflow Scheduler
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
+    networks:
+      - app-network
+
+  # Airflow Worker
+  airflow-worker:
+    <<: *airflow-common
+    command: celery worker
+    restart: always
+    networks:
+      - app-network
+
+  # Airflow Triggerer
+  airflow-triggerer:
+    <<: *airflow-common
+    command: triggerer
+    restart: always
+    networks:
+      - app-network
+
+  # Airflow Initialization Service
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db init
+        if [[ -n "${_AIRFLOW_WWW_USER_USERNAME}" ]]; then
+          airflow users create \
+            --username ${_AIRFLOW_WWW_USER_USERNAME:-airflow} \
+            --firstname Admin \
+            --lastname User \
+            --role Admin \
+            --email admin@example.com \
+            --password ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+        fi
+    networks:
+      - app-network
+
+  # Postgres Agent (to send data to Snowflake)
+  postgresql-agent:
+    image: snowflakedb/database-connector-agent:latest
+    container_name: postgresql-agent
+    restart: unless-stopped
+    volumes:
+      - ./agent-keys:/home/agent/.ssh:ro
+      - ./configuration/snowflake.json:/home/agent/snowflake.json:ro
+      - ./configuration/datasources.json:/home/agent/datasources.json:ro
+      - ./configuration/postgresql.conf:/etc/postgresql/postgresql.conf
+    env_file:
+      - ./configuration/postgresql.conf
+    mem_limit: 6g
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

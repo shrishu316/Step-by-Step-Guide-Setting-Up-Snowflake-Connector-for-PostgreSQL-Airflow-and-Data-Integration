@@ -1,0 +1,15 @@
+﻿additional file to sign in in airflow please run below code first 
+
+sudo docker-compose up
+
+
+and after running all the containers run below command in new terminel under folder name:- /home/user_name/folder_name/airflow-docker
+
+sudo docker-compose exec airflow-webserver airflow users create \
+    --username airflow \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password airflow
+
