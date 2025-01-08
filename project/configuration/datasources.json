@@ -1,0 +1,13 @@
+
+{
+    "PSQLDS1": {
+        "url": "jdbc:postgresql://airflow-postgres-container:5432/postgres",
+        "username": "postgres",
+        "password": "postgres",
+        "publication": "agent_postgres_publication",
+        "ssl": false
+    }
+}
+
+
+
