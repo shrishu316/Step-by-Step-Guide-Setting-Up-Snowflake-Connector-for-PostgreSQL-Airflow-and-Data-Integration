@@ -18,6 +18,8 @@
       --email admin@example.com \
       --password airflow
   ```
+  ![Screenshot from 2025-01-08 15-53-52](https://github.com/user-attachments/assets/2a19582a-2c31-4fdb-96c1-11790a023d86)
+
 
 ### 1.2 **Run Airflow in the Terminal**:  
 
