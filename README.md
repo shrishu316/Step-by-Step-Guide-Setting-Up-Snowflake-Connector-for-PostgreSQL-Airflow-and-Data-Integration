@@ -165,21 +165,30 @@ docker-compose up -d
 
 3. **Install Snowflake Connector**:  
    - Search for **Snowflake Connector for PostgreSQL** in the Marketplace or Apps section.  
-   - Download the connector.  
+   - Download the connector.
+   ![Screenshot from 2025-01-07 18-14-01](https://github.com/user-attachments/assets/3622033b-aea3-4184-b3e1-1a55660cf5a2)
+
 
 ---
 
 ## **5. Configure the Snowflake Connector**
 1. **Start Configuration**:  
-   - After downloading, click on **Configure**.  
-   - Leave the given name as is and proceed by clicking **Configure** again.  
+   - After downloading, click on **Configure**.
+   ![Screenshot from 2025-01-07 18-20-35](https://github.com/user-attachments/assets/60666eee-d5a9-431c-8cab-58d6e82d4511)
+   ![Screenshot from 2025-01-07 18-24-42](https://github.com/user-attachments/assets/44a7ce92-86a4-4d4c-ab28-60d214b2e7da)
+   - Leave the given name as is and proceed by clicking **Configure** again.
+   ![Screenshot from 2025-01-07 18-25-55](https://github.com/user-attachments/assets/e0fd9e8d-65ea-4c24-b93d-59c3e5af4377)
+
 
 2. **Generate Configuration File**:  
-   - After configuration, click on **Generate File**.  
-   - Download the **snowflake.json** file.  
+   - After configuration, click on **Generate File**.
+   ![Screenshot from 2025-01-07 18-26-17](https://github.com/user-attachments/assets/15a88475-76a2-48b4-9f41-a90c8e3a8c62)  
+   - Download the **snowflake.json** file.
+   - Do not close this tab leave it as it is you have to come back to this tab.
 
 3. **Move Configuration File**:  
    - Move the downloaded `snowflake.json` file to the folder named **configuration**.
+   ![Screenshot from 2025-01-07 19-03-10](https://github.com/user-attachments/assets/cbc8424e-edb0-4d90-b5c1-725993cc27db)
 
 ---
 
@@ -221,12 +230,14 @@ docker-compose up -d
      ```
 
    - Copy the displayed public key.
+   ![Screenshot from 2025-01-07 19-02-47](https://github.com/user-attachments/assets/e3a59241-850e-41cb-a391-5ad328823f52)
 
 ---
 
 ## **7. Update Snowflake with the RSA Public Key**
-1. **Go to Snowflake**:  
+1. **Go to Snowflake and open another Snowflake tab**:  
    - Navigate to **SNOWFLAKE_CONNECTOR_FOR_POSTGRESQL**.
+   ![Screenshot from 2025-01-07 19-14-06](https://github.com/user-attachments/assets/6d0596b2-84fa-4db8-acd9-6f1f57f3a53b)
 
 2. **Run the Following Query**:  
    Replace the `<PUBLIC_KEY>` below with your copied key:  
@@ -234,7 +245,7 @@ docker-compose up -d
    ```sql
    ALTER USER SNOWFLAKE_CONNECTOR_FOR_POSTGRESQL_AGENT_USER SET RSA_PUBLIC_KEY='<PUBLIC_KEY>';
    ```
-
+![Screenshot from 2025-01-07 19-16-12](https://github.com/user-attachments/assets/fefd90ac-268c-4cfb-b1ae-aa2991dce504)
 ---
 
 ## **8. Sync Data Between Snowflake and PostgreSQL**
@@ -247,7 +258,10 @@ docker-compose up -d
      ```
 
 2. **Refresh Snowflake**:  
-   - Go to Snowflake and refresh the page.  
+   - Go to Snowflake Configure page.
+   ![Screenshot from 2025-01-07 18-26-17](https://github.com/user-attachments/assets/14646660-2249-4e0d-8888-2f2b96aa5230)
+   - Click on refresh and wait for while.
+   ![Screenshot from 2025-01-07 19-19-04](https://github.com/user-attachments/assets/75fdd3bc-f931-4cb6-895d-12e8fb8add6d) 
    - If issues persist, inspect logs using:  
 
      ```bash
