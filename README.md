@@ -1,4 +1,4 @@
-# Step-by-Step-Guide-Setting-Up-Snowflake-Connector-for-PostgreSQL-Airflow-and-Data-Integration
+# Comprehensive Data Processing Solution: Operational to Analytical Pipeline
 
 
 ## Pipeline Architecture Diagram
