@@ -14,7 +14,7 @@ The pipeline minimizes the use of cloud services like AWS, GCP, and Azure, offer
 2. [How Does the Pipeline Work?](#how-does-the-pipeline-work)
 3. [Key Features](#key-features)
 4. [Why is This Pipeline Better?](#why-is-this-pipeline-better)
-5. [Installation and Setup](#installation-and-setup)
+5. [Prerequisites](#Prerequisites)
 6. [How This Pipeline Benefits the Company](#how-this-pipeline-benefits-the-company)
 7. [Conclusion](#conclusion)
 
